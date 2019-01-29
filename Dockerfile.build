@@ -1,0 +1,32 @@
+# vimacc® Professional Dockerfile
+# Bases on CentOS 7 and vimacc® Professional prelimitary releases for CentOS
+#
+# WARNING!
+# These Dockerfile and the resulting docker images are provided AS IS and WITHOUT ANY WARRANTY!
+# If you want to use vimacc® Professional in any productive environment,
+# it's unalterable to get in contact with the official vimacc support (support@accellence.de).
+#
+# Copryright 2019 Accellence Technologies GmbH, Hannover, Germany
+# All rights reserved.
+FROM centos:7
+LABEL "de.accellence.vendor"="Accellence Technologies GmbH"
+LABEL version="2.2.4.12"
+LABEL "de.accellence.product"="vimacc OA"
+
+# Enable EPEL repository
+RUN yum -y install epel-release && \
+yum -y update && \
+yum -y clean all
+
+# Copy vimacc installation files and install
+RUN mkdir -p /vimacc_install \
+    && cd /vimacc_install \
+    && curl -SL --remote-name-all https://l82.de:8443/accellence/vimaccOA-2.2.4.12-0.x86_64.tar.00[1-5] \
+	&& cat vimaccOA*.tar.00*  \
+    | tar -x \
+	&& cd / \
+    && yum -y install /vimacc_install/vimaccOA*.rpm \
+	&& rm -Rf /vimacc_install
+
+# Check vimacc installation
+CMD ["/opt/Accellence/vimacc/bin/AccVimaccDumpDb", "-h"]
