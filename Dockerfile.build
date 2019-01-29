@@ -32,5 +32,4 @@ ADD runVimaccRoot.sh /usr/local/bin/runVimaccRoot.sh
 RUN chmod 777 /usr/local/bin/runVimaccRoot.sh
 
 # Start AccVimaccRoot and wait until exit
-CMD /usr/local/bin/runVimaccRoot.sh
-
+CMD bash -C '/usr/local/bin/runVimaccRoot.sh';'bash'
