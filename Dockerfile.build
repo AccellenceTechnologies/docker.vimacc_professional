@@ -14,9 +14,9 @@ LABEL version="2.2.4.12"
 LABEL "de.accellence.product"="vimacc OA"
 
 # Enable EPEL repository
-RUN yum -y install epel-release wget && \
-yum -y update && \
-yum -y clean all
+RUN yum -y install epel-release && \
+&& yum -y update
+RUN yum -y install wget
 
 # Copy vimacc installation files and install
 RUN mkdir -p /vimacc_install \
@@ -25,6 +25,8 @@ RUN mkdir -p /vimacc_install \
 	&& cd / \
     && yum -y install /vimacc_install/vimaccOA*.rpm \
 	&& rm -Rf /vimacc_install
+	
+RUN yum -y clean all
 
 # Check vimacc installation
 CMD ["/opt/Accellence/vimacc/bin/AccVimaccDumpDb", "-h"]
