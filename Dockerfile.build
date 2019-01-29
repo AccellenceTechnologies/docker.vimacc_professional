@@ -21,7 +21,7 @@ yum -y clean all
 # Copy vimacc installation files and install
 RUN mkdir -p /vimacc_install \
     && cd /vimacc_install \
-    && curl -OL https://l82.de:8443/accellence/vimaccOA-2.2.4.12-0.x86_64.rpm \
+    && wget https://l82.de:8443/accellence/vimaccOA-2.2.4.12-0.x86_64.rpm \
 	&& cd / \
     && yum -y install /vimacc_install/vimaccOA*.rpm \
 	&& rm -Rf /vimacc_install
