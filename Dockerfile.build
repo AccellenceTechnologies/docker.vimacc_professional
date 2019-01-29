@@ -14,7 +14,7 @@ LABEL version="2.2.4.12"
 LABEL "de.accellence.product"="vimacc OA"
 
 # Enable EPEL repository
-RUN yum -y install epel-release && \
+RUN yum -y install epel-release wget && \
 yum -y update && \
 yum -y clean all
 
